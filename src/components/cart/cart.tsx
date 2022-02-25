@@ -1,10 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { postProduct } from '../../store/api-actions';
 
-import CartItem from './cart-item/cart-item'
 import { getCart } from '../../store/selectors';
+import CartItem from './cart-item/cart-item'
 
 export default function Cart(): JSX.Element {
+  const [userInput, setUserInput] = useState('');
   const cart = useSelector(getCart);
+  const dispatch = useDispatch();
+
+  const onAddEvent = () => {
+    dispatch(postProduct({
+      name: userInput,
+      price: Math.ceil(Math.random()*100),
+      quantity: 1,
+    }));
+  };
 
   return (
     <div className="container">
@@ -12,8 +24,18 @@ export default function Cart(): JSX.Element {
         <h1 className="page-content__title">Cart</h1>
 
         <div className="page-content__header-search">
-          <input className="page-content__header-input" type="text" />
-          <button className="button">Add</button>
+          <input
+            onChange={(evt) => setUserInput(evt.currentTarget.value)}
+            value={userInput}
+            className="page-content__header-input"
+            type="text"
+          />
+          <button
+            onClick={onAddEvent}
+            className="button"
+          >
+            Add
+          </button>
         </div>
       </div>
       <div className="cart">

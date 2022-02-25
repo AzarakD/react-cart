@@ -9,6 +9,7 @@ import { State } from './state';
 
 export enum ActionType {
   LoadProducts = 'data/loadProducts',
+  UpdateCart = 'app/updateCart',
 };
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

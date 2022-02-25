@@ -4,3 +4,9 @@ export type Product = {
   price: number,
   quantity: number,
 };
+
+export type ProductToAdd = {
+  name: string,
+  price: number,
+  quantity: number,
+};
