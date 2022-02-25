@@ -225,6 +225,7 @@ a {
 }
 
 .cart-item__price {
+  min-width: 100px;
   align-self: center;
   margin-right: 10px;
   font-size: 20px;
