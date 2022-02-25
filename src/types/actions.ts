@@ -4,6 +4,7 @@ import {
   ThunkDispatch
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+
 import { State } from './state';
 
 export enum ActionType {

@@ -1,4 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
+
 import { loadProducts } from './actions';
 import { State } from '../types/state';
 
