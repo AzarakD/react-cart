@@ -1,0 +1,22 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Very Interesting Book",
+      "price": 12,
+      "quantity": 3
+    },
+    {
+      "id": 2,
+      "name": "Rare Luxury Item",
+      "price": 999,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "name": "Super Necessary Thing",
+      "price": 53,
+      "quantity": 5
+    }
+  ]
+}
