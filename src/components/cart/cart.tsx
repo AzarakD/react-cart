@@ -36,7 +36,7 @@ export default function Cart(): JSX.Element {
       <div className="cart">
         {
           mockItems.length
-            ? mockItems.map((item) => <CartItem item={item} />)
+            ? mockItems.map((item) => <CartItem key={item.id} item={item} />)
             : <p><i>Your cart is empty</i></p>
         }
         <div className="cart__footer">
