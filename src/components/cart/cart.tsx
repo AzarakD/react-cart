@@ -1,3 +1,5 @@
+import CartItem from './cart-item/cart-item'
+
 export default function Cart(): JSX.Element {
   return (
     <div className="container">
@@ -10,7 +12,7 @@ export default function Cart(): JSX.Element {
         </div>
       </div>
       <div className="cart">
-
+        <CartItem />
         <div className="cart__footer">
           <div className="cart__total-info">
             <p className="cart__total-item">
