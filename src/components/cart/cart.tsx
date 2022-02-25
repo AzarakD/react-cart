@@ -1,28 +1,11 @@
-import CartItem from './cart-item/cart-item'
-import { Product } from '../../types/product';
+import { useSelector } from 'react-redux';
 
-const mockItems: Product[] = [
-  {
-    id: 1,
-    name: 'Some name 1',
-    price: 111000,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: 'Some name 2',
-    price: 300,
-    quantity: 3,
-  },
-  {
-    id: 3,
-    name: 'Some name 3',
-    price: 200,
-    quantity: 2,
-  },
-];
+import CartItem from './cart-item/cart-item'
+import { getCart } from '../../store/selectors';
 
 export default function Cart(): JSX.Element {
+  const cart = useSelector(getCart);
+
   return (
     <div className="container">
       <div className="page-content__header">
@@ -35,8 +18,8 @@ export default function Cart(): JSX.Element {
       </div>
       <div className="cart">
         {
-          mockItems.length
-            ? mockItems.map((item) => <CartItem key={item.id} item={item} />)
+          cart.length
+            ? cart.map((item) => <CartItem key={item.id} item={item} />)
             : <p><i>Your cart is empty</i></p>
         }
         <div className="cart__footer">
