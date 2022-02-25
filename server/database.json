@@ -17,24 +17,6 @@
       "price": 53,
       "quantity": 5,
       "id": 3
-    },
-    {
-      "name": "something",
-      "price": 100,
-      "quantity": 1,
-      "id": 4
-    },
-    {
-      "name": "something 2",
-      "price": 100,
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "name": "something 2123",
-      "price": 100,
-      "quantity": 1,
-      "id": 6
     }
   ]
 }
