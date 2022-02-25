@@ -1,4 +1,5 @@
 import Cart from '../../components/cart/cart';
+import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 
 export default function CartPage(): JSX.Element {
@@ -8,6 +9,7 @@ export default function CartPage(): JSX.Element {
       <main className="page-content">
         <Cart />
       </main>
+      <Footer />
     </div>
   );
 }
