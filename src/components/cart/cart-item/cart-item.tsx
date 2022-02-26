@@ -30,6 +30,17 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     }
   };
 
+  const onDecreaseEvent = () => {
+    const newValue = userInput - 1;
+
+    if (newValue >= Count.Min) {
+      setUserInput(newValue);
+      dispatch(patchProduct(id, newValue));
+    } else {
+      dispatch(deleteProduct(id));
+    }
+  };
+
   return (
     <div className="cart-item">
       <button
@@ -48,7 +59,13 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
       </div>
       <div className="cart-item__price">{setPrice(price)}</div>
       <div className="quantity cart-item__quantity">
-        <button className="quantity__button" aria-label="Decrease quantity">-</button>
+        <button
+          onClick={onDecreaseEvent}
+          className="quantity__button"
+          aria-label="Decrease quantity"
+        >
+          -
+        </button>
         <input
           onChange={(evt) => setUserInput(+evt.currentTarget.value)}
           value={userInput}
