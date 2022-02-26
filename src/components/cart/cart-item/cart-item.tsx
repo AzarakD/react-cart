@@ -2,11 +2,11 @@ import { ChangeEvent, FocusEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useDebounce } from '../../../hooks/use-debounce';
+import { useDidUpdateEffect } from '../../../hooks/use-did-update';
 import { deleteProduct, patchProduct } from '../../../store/api-actions';
 import { setPrice } from '../../../utils';
 import { Count } from '../../../const';
 import { Product } from '../../../types/product';
-import { useDidUpdateEffect } from '../../../hooks/use-did-update';
 
 export default function CartItem({item}: {item: Product}): JSX.Element {
   const {
@@ -17,6 +17,7 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
   } = item;
 
   const [userInput, setUserInput] = useState(quantity);
+  const [shownInput, setShownInput] = useState(quantity);
   const debouncedInput = useDebounce(userInput);
   const dispatch = useDispatch();
 
@@ -33,6 +34,7 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
 
     if (newValue <= Count.Max) {
       setUserInput(newValue);
+      setShownInput(newValue);
     }
   };
 
@@ -41,8 +43,9 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
 
     if (newValue >= Count.Min) {
       setUserInput(newValue);
+      setShownInput(newValue);
     } else {
-      dispatch(deleteProduct(id));
+      onDeleteEvent();
     }
   };
 
@@ -50,7 +53,7 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     const inputValue = +evt.currentTarget.value;
 
     if (inputValue >= 0) {
-      setUserInput(inputValue);
+      setShownInput(inputValue);
     }
   };
 
@@ -63,8 +66,8 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
       inputValue = Count.Max;
     }
     if (inputValue !== quantity) {
-      dispatch(patchProduct(id, inputValue));
       setUserInput(inputValue);
+      setShownInput(inputValue);
     }
   };
 
@@ -96,7 +99,7 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
         <input
           onChange={onInputChangeEvent}
           onBlur={onBlurEvent}
-          value={userInput}
+          value={shownInput}
           className="quantity__input"
           type="number"
           placeholder="1"
