@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { deleteProduct, patchProduct } from '../../../store/api-actions';
@@ -41,6 +41,28 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     }
   };
 
+  const onInputChangeEvent = (evt: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = +evt.currentTarget.value;
+
+    if (inputValue >= 0) {
+      setUserInput(inputValue);
+    }
+  };
+
+  const onBlurEvent = (evt: FocusEvent<HTMLInputElement, Element>) => {
+    let inputValue = +evt.currentTarget.value;
+
+    if (inputValue < Count.Min) {
+      inputValue = Count.Min;
+    } else if (inputValue > Count.Max) {
+      inputValue = Count.Max;
+    }
+    if (inputValue !== quantity) {
+      dispatch(patchProduct(id, inputValue));
+      setUserInput(inputValue);
+    }
+  };
+
   return (
     <div className="cart-item">
       <button
@@ -67,7 +89,8 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
           -
         </button>
         <input
-          onChange={(evt) => setUserInput(+evt.currentTarget.value)}
+          onChange={onInputChangeEvent}
+          onBlur={onBlurEvent}
           value={userInput}
           className="quantity__input"
           type="number"
