@@ -1,4 +1,9 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  useEffect,
+  useState
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useDebounce } from '../../../hooks/use-debounce';
@@ -20,6 +25,10 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
   const [shownInput, setShownInput] = useState(quantity);
   const debouncedInput = useDebounce(userInput);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setShownInput(quantity);
+  }, [quantity]);
 
   useDidUpdateEffect(() => {
     dispatch(patchProduct(id, debouncedInput));
@@ -67,7 +76,6 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     }
     if (inputValue !== quantity) {
       setUserInput(inputValue);
-      setShownInput(inputValue);
     }
   };
 
