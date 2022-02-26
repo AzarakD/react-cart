@@ -27,3 +27,13 @@ export const deleteProduct = (productId: number): ThunkActionResult =>
     const update = getStore().cart.filter((item) => item.id !== productId);
     dispatch(updateCart(update));
   };
+
+export const patchProduct = (productId: number, quantity: number): ThunkActionResult =>
+  async (dispatch, getStore, api) => {
+    const { data } = await api.patch<Product>(`${APIRoute.Products}/${productId}`, { quantity });
+
+    const index = getStore().cart.findIndex((item) => item.id === productId);
+    const update = getStore().cart.slice();
+    update[index] = {...data};
+    dispatch(updateCart(update));
+  };

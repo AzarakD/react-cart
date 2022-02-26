@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteProduct } from '../../../store/api-actions';
 
-import { Product } from '../../../types/product';
+import { deleteProduct, patchProduct } from '../../../store/api-actions';
 import { setPrice } from '../../../utils';
+import { Count } from '../../../const';
+import { Product } from '../../../types/product';
 
 export default function CartItem({item}: {item: Product}): JSX.Element {
   const {
@@ -12,10 +14,20 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     quantity,
   } = item;
 
+  const [userInput, setUserInput] = useState(quantity);
   const dispatch = useDispatch();
 
   const onDeleteEvent = () => {
     dispatch(deleteProduct(id));
+  };
+
+  const onIncreaseEvent = () => {
+    const newValue = userInput + 1;
+
+    if (newValue <= Count.Max) {
+      setUserInput(newValue);
+      dispatch(patchProduct(id, newValue));
+    }
   };
 
   return (
@@ -38,13 +50,21 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
       <div className="quantity cart-item__quantity">
         <button className="quantity__button" aria-label="Decrease quantity">-</button>
         <input
+          onChange={(evt) => setUserInput(+evt.currentTarget.value)}
+          value={userInput}
           className="quantity__input"
           type="number"
           placeholder="1"
           id={`${id}`}
           name={`${id}-count`}
         />
-        <button className="quantity__button" aria-label="Increase quantity">+</button>
+        <button
+          onClick={onIncreaseEvent}
+          className="quantity__button"
+          aria-label="Increase quantity"
+        >
+          +
+        </button>
       </div>
       <div className="cart-item__price-total">{setPrice(price * quantity)}</div>
     </div>
