@@ -22,7 +22,7 @@ export default function CartPage(): JSX.Element {
         {
           isDataLoaded
             ? <Cart />
-            : <p><i>Loading...</i></p>
+            : <p style={{textAlign: "center"}}><i>Loading...</i></p>
         }
       </main>
       <Footer />

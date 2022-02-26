@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 import { getCart } from '../../store/selectors';
 import CartItem from './cart-item/cart-item'
 import CartSearch from './cart-search/cart-search';
+import { setPrice } from '../../utils';
 
 export default function Cart(): JSX.Element {
   const cart = useSelector(getCart);
+
+  const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
   return (
     <div className="container">
@@ -23,8 +26,13 @@ export default function Cart(): JSX.Element {
           <div className="cart__total-info">
             <p className="cart__total-item">
               <span className="cart__total-value-name">Total:</span>
-              <span className="cart__total-value">0 $</span></p>
-            <button className="button cart__order-button">Checkout</button>
+              <span className="cart__total-value">{setPrice(totalPrice)}</span></p>
+            <button
+              onClick={() => alert('Thanks for buying! // next action')}
+              className="button cart__order-button"
+            >
+              Checkout
+            </button>
           </div>
         </div>
       </div>
