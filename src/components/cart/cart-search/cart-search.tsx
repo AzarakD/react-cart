@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { postProduct } from '../../../store/api-actions';
+import { getRandomInt } from '../../../utils';
 
 export default function CartSearch(): JSX.Element {
   const [userInput, setUserInput] = useState('');
@@ -13,7 +14,7 @@ export default function CartSearch(): JSX.Element {
     if (userInput) {
       dispatch(postProduct({
         name: userInput,
-        price: Math.ceil(Math.random()*100),
+        price: getRandomInt(),
         quantity: 1,
       }));
       setUserInput('');
