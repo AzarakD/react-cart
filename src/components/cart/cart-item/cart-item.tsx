@@ -1,10 +1,12 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useDebounce } from '../../../hooks/use-debounce';
 import { deleteProduct, patchProduct } from '../../../store/api-actions';
 import { setPrice } from '../../../utils';
 import { Count } from '../../../const';
 import { Product } from '../../../types/product';
+import { useDidUpdateEffect } from '../../../hooks/use-did-update';
 
 export default function CartItem({item}: {item: Product}): JSX.Element {
   const {
@@ -15,7 +17,12 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
   } = item;
 
   const [userInput, setUserInput] = useState(quantity);
+  const debouncedInput = useDebounce(userInput);
   const dispatch = useDispatch();
+
+  useDidUpdateEffect(() => {
+    dispatch(patchProduct(id, debouncedInput));
+  }, [debouncedInput, dispatch, id]);
 
   const onDeleteEvent = () => {
     dispatch(deleteProduct(id));
@@ -26,7 +33,6 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
 
     if (newValue <= Count.Max) {
       setUserInput(newValue);
-      dispatch(patchProduct(id, newValue));
     }
   };
 
@@ -35,7 +41,6 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
 
     if (newValue >= Count.Min) {
       setUserInput(newValue);
-      dispatch(patchProduct(id, newValue));
     } else {
       dispatch(deleteProduct(id));
     }
