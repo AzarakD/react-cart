@@ -18,3 +18,11 @@ export const postProduct = (product: ProductToAdd): ThunkActionResult =>
     ];
     dispatch(updateCart(update));
   };
+
+export const deleteProduct = (productId: number): ThunkActionResult =>
+  async (dispatch, getStore, api) => {
+    await api.delete(`/products/${productId}`);
+
+    const update = getStore().cart.filter((item) => item.id !== productId);
+    dispatch(updateCart(update));
+  };

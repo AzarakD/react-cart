@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux';
+import { deleteProduct } from '../../../store/api-actions';
+
 import { Product } from '../../../types/product';
 
 export default function CartItem({item}: {item: Product}): JSX.Element {
@@ -8,9 +11,20 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     quantity,
   } = item;
 
+  const dispatch = useDispatch();
+
+  const onDeleteEvent = () => {
+    dispatch(deleteProduct(id));
+  };
+
   return (
     <div className="cart-item">
-      <button className="cart-item__close-button" type="button" aria-label="Delete">
+      <button
+        onClick={onDeleteEvent}
+        className="cart-item__close-button"
+        type="button"
+        aria-label="Delete"
+      >
         <span className="cart-item__close-button-icon"></span>
       </button>
       <div className="cart-item__image">

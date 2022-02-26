@@ -129,8 +129,6 @@ a {
 }
 
 .page-content__header-search {
-    /* position: relative;
-    bottom: 10px; */
   display: flex;
   width: 75%;
   min-width: 130px;
@@ -187,7 +185,7 @@ a {
 
 .cart-item__close-button-icon::before,
 .cart-item__close-button-icon::after {
-  top: 6.5px;
+  right: 0;
   position: absolute;
   width: 17px;
   height: 2px;
