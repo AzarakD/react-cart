@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { loadProducts, updateCart } from './actions';
 import { State } from '../types/state';
 
-const initialState: State = {
+export const initialState: State = {
   cart: [],
   isDataLoaded: false,
 };
