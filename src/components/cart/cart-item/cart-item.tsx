@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FocusEvent,
+  memo,
   useEffect,
   useState
 } from 'react';
@@ -13,7 +14,7 @@ import { setPrice } from '../../../utils';
 import { Count } from '../../../const';
 import { Product } from '../../../types/product';
 
-export default function CartItem({item}: {item: Product}): JSX.Element {
+function CartItem({item}: {item: Product}): JSX.Element {
   const {
     id,
     name,
@@ -126,3 +127,5 @@ export default function CartItem({item}: {item: Product}): JSX.Element {
     </div>
   );  
 }
+
+export default memo(CartItem);
