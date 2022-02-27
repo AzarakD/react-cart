@@ -4,13 +4,14 @@ import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 
 import { createAPI } from '../services/api';
-import { State } from '../types/state';
-import { APIRoute } from '../const';
 import { makeFakeCartItem, makeFakeCartItems } from '../mocks/fake-cart-item';
 import { deleteProduct, fetchProducts, patchProduct, postProduct } from './api-actions';
 import { loadProducts, updateCart } from './actions';
+import { APIRoute } from '../const';
+import { State } from '../types/state';
 
 const ITEM_COUNT = 5;
+
 const fakeCartItems = makeFakeCartItems(ITEM_COUNT);
 const fakeCartItem = makeFakeCartItem();
 

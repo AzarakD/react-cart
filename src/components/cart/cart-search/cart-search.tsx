@@ -39,6 +39,7 @@ export default function CartSearch(): JSX.Element {
         value={userInput}
         className="page-content__header-input"
         type="text"
+        placeholder='What to add?'
       />
       <button className="button" >Add</button>
     </form>

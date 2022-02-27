@@ -81,7 +81,7 @@ function CartItem({item}: {item: Product}): JSX.Element {
   };
 
   return (
-    <div className="cart-item">
+    <div className="cart-item" data-testid="cart-item">
       <button
         onClick={onDeleteEvent}
         className="cart-item__close-button"
